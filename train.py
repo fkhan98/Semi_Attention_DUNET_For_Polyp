@@ -68,8 +68,8 @@ if __name__ == "__main__":
     valid_y = sorted(glob(os.path.join(valid_path, "mask", "*.jpg")))
 
     model_path = "files/model.h5"
-    batch_size = 16
-    epochs = 50
+    batch_size = 12
+    epochs = 40
     lr = 1e-5
     shape = (288, 384, 3)
 
