@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     model_path = "files/model.h5"
     batch_size = 16
-    epochs = 40
+    epochs = 50
     lr = 1e-5
     shape = (288, 384, 3)
 
@@ -84,7 +84,7 @@ if __name__ == "__main__":
     train_dataset = tf_dataset(train_x, train_y, batch=batch_size)
     valid_dataset = tf_dataset(valid_x, valid_y, batch=batch_size)
     
-    model.compile(loss=dice_loss, optimizer=Nadam(lr), metrics=metrics)
+    model.compile(loss=binary_crossentropy, optimizer=Nadam(lr), metrics=metrics)
 
     callbacks = [
         ModelCheckpoint(model_path),

@@ -54,6 +54,12 @@ def load_model_weight(path):
         'iou': iou
         }):
         model = load_model(path)
+        model.compile(loss=binary_crossentropy, optimizer=Nadam(1e-5),metrics = [
+        dice_coef,
+        iou,
+        Recall(),
+        Precision()
+    ])
     return model
     # model = build_model(256)
     # model.load_weights(path)
