@@ -140,8 +140,9 @@ def decoder1(inputs, skip_connections):
         ##custom code##{
         x = Concatenate()([x, att])
         ##custom code##}
+
+        print(f"Applying dropout in decoder1 up layer {i + 1}")
         if i < 2:
-            print(f"Applying dropout in decoder1 up layer {i + 1}")
             x = conv_block(x, f, drop_out=0.3)
         else:
             x = conv_block(x, f, drop_out=0.1)
@@ -179,8 +180,9 @@ def decoder2(inputs, skip_1, skip_2):
         ##custom code##{
         x = Concatenate()([x, skip_1[i], att_enc_2])
         ##custom code##}
+
+        print(f"Applying dropout in decoder2 up layer {i + 1}")
         if i < 2:
-            print(f"Applying dropout in decoder2 up layer {i + 1}")
             x = conv_block(x, f, drop_out=0.5)
         else:
             x = conv_block(x, f, drop_out=0.3)
