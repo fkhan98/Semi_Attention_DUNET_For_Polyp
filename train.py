@@ -112,39 +112,41 @@ if __name__ == "__main__":
             callbacks=callbacks,
             shuffle=False)
 
-    # PLOT LOSS AND ACCURACY
+    print(history.history.values())
 
-    #-----------------------------------------------------------
-    # Retrieve a list of list results on training and test data
-    # sets for each training epoch
-    #-----------------------------------------------------------
-    loss=history.history['loss']
-    val_loss=history.history['val_loss']
-    dice = history.history['dice_coef']
-    val_dice = history.history['val_dice_coef']
+    # # PLOT LOSS AND ACCURACY
 
-    epochs=range(len(loss)) # Get number of epochs
+    # #-----------------------------------------------------------
+    # # Retrieve a list of list results on training and test data
+    # # sets for each training epoch
+    # #-----------------------------------------------------------
+    # loss=history.history['loss']
+    # val_loss=history.history['val_loss']
+    # dice = history.history['dice_coef']
+    # val_dice = history.history['val_dice_coef']
 
-    #------------------------------------------------
-    # Plot training and validation loss per epoch
-    #------------------------------------------------
-    plt.figure(figsize=(10, 6))
-    plt.plot(epochs, loss, 'r', label="Training Loss")
-    plt.plot(epochs, val_loss, 'b', label="Validation Loss")
-    plt.title('Training and validation loss')
-    plt.xlabel('Number of epochs')
-    plt.ylabel('Loss')
-    plt.legend()
-    plt.show()
+    # epochs=range(len(loss)) # Get number of epochs
 
-    #------------------------------------------------
-    # Plot training and validation dice coefficient per epoch
-    #------------------------------------------------
-    plt.figure(figsize=(10, 6))
-    plt.plot(epochs, dice, 'r', label="Training Dice Coefficient")
-    plt.plot(epochs, val_dice, 'b', label="Validation Dice Coefficient")
-    plt.title('Training and validation Dice Coefficient')
-    plt.xlabel('Number of epochs')
-    plt.ylabel('Dice Coefficient')
-    plt.legend()
-    plt.show()
+    # #------------------------------------------------
+    # # Plot training and validation loss per epoch
+    # #------------------------------------------------
+    # plt.figure(figsize=(10, 6))
+    # plt.plot(epochs, loss, 'r', label="Training Loss")
+    # plt.plot(epochs, val_loss, 'b', label="Validation Loss")
+    # plt.title('Training and validation loss')
+    # plt.xlabel('Number of epochs')
+    # plt.ylabel('Loss')
+    # plt.legend()
+    # plt.show()
+
+    # #------------------------------------------------
+    # # Plot training and validation dice coefficient per epoch
+    # #------------------------------------------------
+    # plt.figure(figsize=(10, 6))
+    # plt.plot(epochs, dice, 'r', label="Training Dice Coefficient")
+    # plt.plot(epochs, val_dice, 'b', label="Validation Dice Coefficient")
+    # plt.title('Training and validation Dice Coefficient')
+    # plt.xlabel('Number of epochs')
+    # plt.ylabel('Dice Coefficient')
+    # plt.legend()
+    # plt.show()
