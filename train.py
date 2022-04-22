@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     model_path = "files/model.h5"
     batch_size = 8
-    epochs = 2
+    epochs = 1
     lr = 1e-5
     shape = (288, 384, 3)
 
@@ -118,8 +118,6 @@ if __name__ == "__main__":
     # Retrieve a list of list results on training and test data
     # sets for each training epoch
     #-----------------------------------------------------------
-    acc=history.history['accuracy']
-    val_acc=history.history['val_accuracy']
     loss=history.history['loss']
     val_loss=history.history['val_loss']
     dice = history.history['dice_coef']
