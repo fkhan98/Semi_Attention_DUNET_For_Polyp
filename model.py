@@ -1,4 +1,3 @@
-
 import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras.models import Model
@@ -64,8 +63,32 @@ def squeeze_excite_block(inputs, ratio=8):
     x = Multiply()([init, se])
     return x
 
+
+## regular conv block
+
+# def conv_block(inputs, filters, drop_out=0.0):
+#     x = inputs
+
+#     x = Conv2D(filters, (3, 3), padding="same")(x)
+#     x = BatchNormalization()(x)
+#     x = Activation('relu')(x)
+
+#     x = Conv2D(filters, (3, 3), padding="same")(x)
+#     x = BatchNormalization()(x)
+#     x = Activation('relu')(x)
+    
+#     if drop_out > 0:
+#         x = Dropout(drop_out)(x)
+
+#     x = squeeze_excite_block(x)
+
+#     return x
+
+## residual conv block
+
 def conv_block(inputs, filters, drop_out=0.0):
     x = inputs
+    shortcut = inputs
 
     x = Conv2D(filters, (3, 3), padding="same")(x)
     x = BatchNormalization()(x)
@@ -73,8 +96,13 @@ def conv_block(inputs, filters, drop_out=0.0):
 
     x = Conv2D(filters, (3, 3), padding="same")(x)
     x = BatchNormalization()(x)
+
+    shortcut = Conv2D(filters, (1, 1), padding="same")(shortcut)
+    shortcut = BatchNormalization()(shortcut)
+
+    x = add([shortcut, x])
     x = Activation('relu')(x)
-    
+
     if drop_out > 0:
         x = Dropout(drop_out)(x)
 
@@ -113,10 +141,10 @@ def decoder1(inputs, skip_connections):
         x = Concatenate()([x, att])
         ##custom code##}
         if i < 2:
-            print(f"Applying dropout in up layer {i + 1}")
-            x = conv_block(x, f, drop_out=0.5)
+            print(f"Applying dropout in decoder1 up layer {i + 1}")
+            x = conv_block(x, f, drop_out=0.3)
         else:
-            x = conv_block(x, f, drop_out=0.0)
+            x = conv_block(x, f, drop_out=0.1)
 
     return x
 
@@ -152,10 +180,10 @@ def decoder2(inputs, skip_1, skip_2):
         x = Concatenate()([x, skip_1[i], att_enc_2])
         ##custom code##}
         if i < 2:
-            print(f"Applying dropout in up layer {i + 1}")
+            print(f"Applying dropout in decoder2 up layer {i + 1}")
             x = conv_block(x, f, drop_out=0.5)
         else:
-            x = conv_block(x, f, drop_out=0.0)
+            x = conv_block(x, f, drop_out=0.3)
 
     return x
 

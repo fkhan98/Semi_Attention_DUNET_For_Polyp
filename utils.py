@@ -1,4 +1,3 @@
-
 import os
 import numpy as np
 import cv2
@@ -61,6 +60,3 @@ def load_model_weight(path):
         Precision()
     ])
     return model
-    # model = build_model(256)
-    # model.load_weights(path)
-    # return model

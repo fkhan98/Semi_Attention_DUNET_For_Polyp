@@ -1,4 +1,3 @@
-
 import os
 import numpy as np
 import cv2
@@ -11,6 +10,8 @@ from sklearn.model_selection import train_test_split
 from model import build_model
 from utils import *
 from metrics import *
+import matplotlib.image  as mpimg
+import matplotlib.pyplot as plt
 
 def read_image(x):
     x = x.decode()
@@ -103,10 +104,61 @@ if __name__ == "__main__":
     if len(valid_x) % batch_size != 0:
         valid_steps += 1
 
-    model.fit(train_dataset,
+    history = model.fit(train_dataset,
             epochs=epochs,
             validation_data=valid_dataset,
             steps_per_epoch=train_steps,
             validation_steps=valid_steps,
             callbacks=callbacks,
             shuffle=False)
+
+    # PLOT LOSS AND ACCURACY
+
+    #-----------------------------------------------------------
+    # Retrieve a list of list results on training and test data
+    # sets for each training epoch
+    #-----------------------------------------------------------
+    acc=history.history['accuracy']
+    val_acc=history.history['val_accuracy']
+    loss=history.history['loss']
+    val_loss=history.history['val_loss']
+    dice = history.history['dice_coef']
+    val_dice = history.history['val_dice_coef']
+
+    epochs=range(len(acc)) # Get number of epochs
+
+    #------------------------------------------------
+    # Plot training and validation accuracy per epoch
+    #------------------------------------------------
+    plt.figure(figsize=(10, 6))
+    plt.plot(epochs, acc, 'r', label="Training Accuracy")
+    plt.plot(epochs, val_acc, 'b', label="Validation Accuracy")
+    plt.title('Training and validation accuracy')
+    plt.xlabel('Number of epochs')
+    plt.ylabel('Accuracy')
+    plt.legend()
+    plt.show()
+
+    #------------------------------------------------
+    # Plot training and validation loss per epoch
+    #------------------------------------------------
+    plt.figure(figsize=(10, 6))
+    plt.plot(epochs, loss, 'r', label="Training Loss")
+    plt.plot(epochs, val_loss, 'b', label="Validation Loss")
+    plt.title('Training and validation loss')
+    plt.xlabel('Number of epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.show()
+
+    #------------------------------------------------
+    # Plot training and validation dice coefficient per epoch
+    #------------------------------------------------
+    plt.figure(figsize=(10, 6))
+    plt.plot(epochs, dice, 'r', label="Training Dice Coefficient")
+    plt.plot(epochs, val_dice, 'b', label="Validation Dice Coefficient")
+    plt.title('Training and validation Dice Coefficient')
+    plt.xlabel('Number of epochs')
+    plt.ylabel('Dice Coefficient')
+    plt.legend()
+    plt.show()
