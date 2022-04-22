@@ -123,19 +123,7 @@ if __name__ == "__main__":
     dice = history.history['dice_coef']
     val_dice = history.history['val_dice_coef']
 
-    epochs=range(len(acc)) # Get number of epochs
-
-    #------------------------------------------------
-    # Plot training and validation accuracy per epoch
-    #------------------------------------------------
-    plt.figure(figsize=(10, 6))
-    plt.plot(epochs, acc, 'r', label="Training Accuracy")
-    plt.plot(epochs, val_acc, 'b', label="Validation Accuracy")
-    plt.title('Training and validation accuracy')
-    plt.xlabel('Number of epochs')
-    plt.ylabel('Accuracy')
-    plt.legend()
-    plt.show()
+    epochs=range(len(loss)) # Get number of epochs
 
     #------------------------------------------------
     # Plot training and validation loss per epoch
